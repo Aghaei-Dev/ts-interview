@@ -18,12 +18,12 @@ By extending JavaScript with type annotations and interfaces, it enables develop
 so We have several built in type in ts.
 like :
 
-`number` : numeric values . integers or floats .
-`string` : Represents a sequence of characters, commonly used for storing textual data.
-`void` : Represents the lack of a type, commonly used as the return type for functions that do not return a value.
-`null` : Represents the absence of a value intentionally assigned to a variable.
-`undefined` : Represents a variable that has not yet been assigned a value.
-`any` :Represents any type of value and allows a variable to store multiple types.
+- `number` : numeric values . integers or floats .
+- `string` : Represents a sequence of characters, commonly used for storing textual data.
+- `void` : Represents the lack of a type, commonly used as the return type for functions that do not return a value.
+- `null` : Represents the absence of a value intentionally assigned to a variable.
+- `undefined` : Represents a variable that has not yet been assigned a value.
+- `any` :Represents any type of value and allows a variable to store multiple types.
 
 give me an example :
 
@@ -102,20 +102,16 @@ let message: string = `hi! i'm ${name} and i'm ${age} years old . i'm a ${job}. 
 <hr/>
 
 <details>
-
-  <summary>6 ) String interpolation in Ts</summary>
-
-its also known as template literal or template string.
-It allows you to embed expressions within string literals, using backticks (`) instead of single or double quotes. To include a variable or expression within the string, use the ${expression} syntax.
-
+  <summary>6 ) Optional parameters in TS?</summary>
+A function can mark one or more of its parameters as optional by suffixing its name with ‘?’. In the example below, the parameter greeting is marked optional.
 example :
 
 ```ts
-let name: string = 'Aghaei'
-let job: string = 'front end developer'
-let age: number = 22
+function greeting(name: string, message?: string) {
+  if (!greeting) greeting = 'Hello'
 
-let message: string = `hi! i'm ${name} and i'm ${age} years old . i'm a ${job}. happy to see you here`
+  console.log(`${greeting}, ${name}`)
+}
 ```
 
 </details>
@@ -205,3 +201,211 @@ greeting('doe') // hi , doe
 </details>
 
 ## Part Two
+
+<details>
+  <summary>1 ) Explain User-defined data types in TS?</summary>
+
+These are the data types that are defined by the user they may contain multiple values of multiple data types.
+
+- `arrays` : In typescript, arrays are used to store the multiple values of any kind of data type.
+
+- `classes` : Used to store different data type values in the form of key-value pairs.
+
+- `Interface` : These represent the basic syntax and blueprint that an entity must adhere to.
+
+- `enums` : A special class that specifies the constant variables.
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>2 ) Explain The <code>any</code> type </summary>
+
+There are times when you want to store a value in a variable but don’t know the type of that variable in advance. For example, the value is coming from an API call or the user input. The ‘any’ type allows you to assign a value of any type to the variable of type any.
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>3 ) How to specify optional properties in TypeScript?</summary>
+
+An object type can have zero or more optional properties by adding a ‘?’ after the property name.
+In the example above, because the property ‘z’ is marked as optional, the compiler won’t complain if we don’t provide it during the initialization.
+
+```ts
+let coordinates: { x: number; y: number; z?: number } = {
+  x: 10,
+  y: 20,
+}
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>4 ) Explain the purpose of the never type in TypeScript</summary>
+
+As the name suggests, the never type represents the type of values that never occur. For example, a function that never returns a value or that always throws an exception can mark its return type as never.
+
+```ts
+function throwError(message: string): never {
+  throw new Error(message)
+}
+```
+
+never Vs Void
+why we use never sometimes?
+
+You might wonder why we need a `never` type when we already have `void`. Though both types look similar, they represent two very different concepts.
+
+A function that doesn't return a value implicitly returns the value undefined in JavaScript. Hence, even though we are saying it’s not returning anything, it’s returning ‘undefined’. We usually ignore the return value in these cases. Such a function is inferred to have a void return type in TypeScript.
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>5 ) What is the <code>typeof</code> operator? How is it used in TypeScript?</summary>
+typeof operator in TypeScript returns the type of the operand as a string.
+
+you can use this for narrowing the type !
+
+example :
+
+```ts
+type Combinable = string | number
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return add.toString() + b.toString()
+  }
+  return a + b
+}
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>6 ) how to use rest parameters and arguments in TypeScript</summary>
+A rest parameter allows a function to accept an indefinite number of arguments as an array. It is denoted by the ‘…’ syntax and indicates that the function can accept one or more arguments.
+
+example :
+
+```ts
+function add(...values: number[]) {
+  let sum = 0
+  values.forEach((val) => (sum += val))
+  return sum
+}
+const sum = add(20, 10, 20, 30)
+console.log(sum) //80
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>7 ) Explain the different variants of the for loop in TypeScript.</summary>
+
+nothing changed from before !
+just like before we use in the js...
+
+- <code>for</code>
+
+  ```ts
+  const values = ['hello world', 2024, false]
+  for (let i = 0; i < values.length; i++) {
+    console.log(values[i])
+  }
+  ```
+
+- <code>forEach</code>
+
+```ts
+const values = ['hello world', 2024, false]
+
+values.forEach((val) => console.log(val))
+```
+
+- <code>for of</code>
+
+```ts
+const values = ['hello world', 2024, false]
+
+for (let val of values) {
+  console.log(val)
+}
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>8 ) Explain the symbol type in TypeScript.</summary>
+
+Symbols were introduced in ES6 and are supported by TypeScript. Similar to numbers and strings, symbols are primitive types. You can use Symbols to create unique properties for objects.
+
+You can create symbol values by calling the Symbol() constructor, optionally providing a string key.
+
+example :
+
+```ts
+let one = Symbol('aghaei')
+let sameAsOne = Symbol('aghaei')
+
+console.log(one === sameAsOne) //false symbols are unique
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>9 ) What is an interface?</summary>
+
+An interface defines a contract by specifying the type of data an object can have and its operations. In TypeScript, you can specify an object’s shape by creating an interface and using it as its type. It’s also called “duck typing”.
+
+example :
+
+```ts
+interface Employee {
+  name: string
+  salary: number
+}
+
+function printEmployeeData(employee: Employee) {
+  console.log(`${employee.name}'s salary = ${employee.salary}`)
+}
+
+let john: Employee = {
+  name: 'John Doe',
+  salary: 10000,
+}
+
+printEmployeeData(john) // "John Doe's salary = 10000"
+```
+
+</details>
+
+<hr/>
+
+<details>
+  <summary>10 ) Explain the various ways to control member visibility in TypeScript.</summary>
+
+TypeScript provides three keywords to control the visibility of class members, such as properties or methods.
+
+- <code>public</code> :You can access a public member anywhere outside the class. All class members are public by default.
+- <code>protected</code> : A protected member is visible only to the subclasses of the class containing that member. Outside code that doesn’t extend the container class can’t access a protected member.
+- <code>private</code> :A private member is only visible inside the class. No outside code can access the private members of a class.
+
+</details>
+
+<hr/>
+
+## Part Three
